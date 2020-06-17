@@ -6,7 +6,7 @@ Page({
   onShareAppMessage: (res) => {
     return {
       title: '一健点评',
-      path: '/',
+      path: '/pages/index/index',
       imageUrl: "../images/logo.png",
       success: (res) => {
         console.log("转发成功", res);
