@@ -3,6 +3,19 @@
 const app = getApp()
 
 Page({
+  onShareAppMessage: (res) => {
+    return {
+      title: '一健点评',
+      path: '/',
+      imageUrl: "../images/logo.png",
+      success: (res) => {
+        console.log("转发成功", res);
+      },
+      fail: (res) => {
+        console.log("转发失败", res);
+      }
+    }
+  },
   data: {
     motto: 'Hello World',
     userInfo: {},
