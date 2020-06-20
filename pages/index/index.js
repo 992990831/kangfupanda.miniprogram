@@ -2,12 +2,35 @@
 //获取应用实例
 const app = getApp()
 
+function getQueryString(url, name) {
+  url = url.split('?')[1];
+  var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+  var r = url.match(reg);
+  if (r != null) {
+      return decodeURI(r[2]);
+  }
+  return null;
+}
+
 Page({
   onShareAppMessage: (res) => {
+    debugger;
+    //let videos = localStorage.getItem("videos");
+    // if(res.webViewUrl)
+    // {
+    //   wx.showToast({
+    //     title: res.webViewUrl.substring(30),
+    //     icon: 'success',
+    //     duration: 4000
+    //   })
+    // }
+    let webViewUrl = res.webViewUrl;//web-view当前的网址
+    let title= getQueryString(webViewUrl, 'title');
+
     return {
-      title: '一健点评',
-      path: '/pages/index/index',
-      imageUrl: "../images/logo.png",
+      title: title,
+      path: `/pages/index/index?url=${res.webViewUrl.substring(30)}`,
+      //imageUrl: "../images/logo.png",
       success: (res) => {
         console.log("转发成功", res);
       },
@@ -28,7 +51,28 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    //debugger;
+    // if(options.url)
+    // {
+    //   wx.showToast({
+    //     title: JSON.stringify(options.url),
+    //     icon: 'success',
+    //     duration: 4000
+    //   })
+    // }
+    
+    //获取H5页面url
+    let webUrl = '';
+    if (options.url) {//获取转发过来的参数
+      webUrl = `https://app.kangfupanda.com/#/${options.url}`;
+    } else {
+      webUrl = "https://app.kangfupanda.com/"
+    }
+    this.setData({
+      webUrl: webUrl
+    })
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
