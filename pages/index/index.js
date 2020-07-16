@@ -4,6 +4,11 @@ const app = getApp()
 
 function getQueryString(url, name) {
   url = url.split('?')[1];
+  if(!url)
+  {
+      return null;
+  }
+
   var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
   var r = url.match(reg);
   if (r != null) {
@@ -14,7 +19,7 @@ function getQueryString(url, name) {
 
 Page({
   onShareAppMessage: (res) => {
-    debugger;
+    //debugger;
     //let videos = localStorage.getItem("videos");
     // if(res.webViewUrl)
     // {
@@ -26,6 +31,10 @@ Page({
     // }
     let webViewUrl = res.webViewUrl;//web-view当前的网址
     let title= getQueryString(webViewUrl, 'title');
+    if(!title)
+    {
+        title='一健点评';
+    }
 
     return {
       title: title,
