@@ -11,5 +11,11 @@
     "navigationBarTextStyle":"black"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "plugins": {
+    "chatGroupPlugin": {
+        "version": "1.0.0",
+        "provider": "wxaae6519cee98d824"
+    }
+   }
 }
